@@ -7,9 +7,18 @@ const Settings = () => {
     const [loading, setLoading] = React.useState(false);
     const [options, setOptions] = React.useState(categories);
     const [questionCategory, setQuestionCategory] = React.useState("");
+    const [questionType, setQuestionType] = React.useState("");
+	const [numberOfQuestions, setNumberOfQuestions] = React.useState(20);
     const handleCategoryChange = event => {
         setQuestionCategory(event.target.value)
     }
+    const handleTypeChange = event => {
+        setQuestionType(event.target.value)
+    }
+    const handleAmountChange = event => {
+        setNumberOfQuestions(event.target.value)
+    }
+    
     if (!loading) {
         return (
             <div>
@@ -25,7 +34,20 @@ const Settings = () => {
                             ))}
                     </select>
                 </div>
+                <div>
+                    <h2>Select Question Type:</h2>
+                    <select value={questionType} onChange={handleTypeChange}>
+                        <option value="" key="type-0">All</option>
+                        <option value="multiple" key="type-1">Multiple Choice</option>
+                        <option value="boolean" key="type-2">True/False</option>
+                    </select>
+                </div>
+                <div>
+                    <h2>Amount of Questions:</h2>
+                    <input value={numberOfQuestions} onChange={handleAmountChange} />
+                </div>
             </div>
+            
         );
     } else {
         <p>
