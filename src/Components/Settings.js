@@ -14,7 +14,7 @@ const Settings = () => {
         return (
             <div>
                 <div>
-                    <h2>Select Category:</h2>
+                    <h2>Select Category Now:</h2>
                     <select value={questionCategory} onChange={handleCategoryChange}>
                         <option>Select Category</option>
                         {options &&
