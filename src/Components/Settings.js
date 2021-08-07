@@ -1,23 +1,45 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 const categories =
     [{"id": 1, "name": "Mathematics"},{"id":2,"name": "Other(add other categories here)"}];
     
 
 const Settings = () => {
-    const [loading, setLoading] = React.useState(false);
+    const loading = useSelector(state => state.options.loading)
     const [options, setOptions] = React.useState(categories);
-    const [questionCategory, setQuestionCategory] = React.useState("");
+    const questionCategory = useSelector(state => state.options.question_category)
     const [questionType, setQuestionType] = React.useState("");
 	const [numberOfQuestions, setNumberOfQuestions] = React.useState(20);
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        const handleLoadingChange = value => {
+            dispatch({
+                type: 'CHANGE_LOADING',
+                loading: value
+            })
+        }
+        handleLoadingChange(true);
+    },[dispatch]);
+
     const handleCategoryChange = event => {
-        setQuestionCategory(event.target.value)
-    }
+        dispatch({
+          type: 'CHANGE_CATEGORY',
+          value: event.target.value
+        })
+      }
     const handleTypeChange = event => {
-        setQuestionType(event.target.value)
-    }
-    const handleAmountChange = event => {
-        setNumberOfQuestions(event.target.value)
-    }
+        dispatch({
+          type: 'CHANGE_TYPE',
+          value: event.target.value
+        })
+      }
+      const handleAmountChange = event => {
+        dispatch({
+          type: 'CHANGE_AMOUNT',
+          value: event.target.value
+        })
+      }
     
     if (!loading) {
         return (
